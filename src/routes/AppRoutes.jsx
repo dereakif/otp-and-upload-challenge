@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../layout";
 import ErrorPage from "../pages/ErrorPage";
@@ -11,8 +11,22 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<OtpPage />} />
-          <Route path="/upload" element={<ImageUploadPage />} />
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <OtpPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/upload"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <ImageUploadPage />
+              </Suspense>
+            }
+          />
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
