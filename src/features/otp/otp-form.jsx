@@ -19,7 +19,7 @@ const initialValues = {
 
 const threeMinutes = 3 * 60 * 1000;
 
-const OtpForm = ({ handleOnSubmit, validOtp }) => {
+const OtpForm = ({ handleOnSubmit, handleSendOtp, validOtp }) => {
   const deadline = new Date(Date.now() + threeMinutes);
   const buttonRef = useRef(null);
   const [isVerified, setIsVerified] = useState(null);
@@ -46,6 +46,7 @@ const OtpForm = ({ handleOnSubmit, validOtp }) => {
     resetTimer();
     resetAllFields();
     focusToFirstInput();
+    handleSendOtp();
   };
 
   const focusToNextInput = (inputId) => {
