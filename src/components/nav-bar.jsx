@@ -1,17 +1,7 @@
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 import { Nav, NavItem, NavLink } from "reactstrap";
-
-const routes = [
-  {
-    path: "/",
-    name: "OTP",
-  },
-  {
-    path: "/upload",
-    name: "Upload",
-  },
-];
+import routes from "../routes";
 
 const NavBar = ({ isVertical = false, isJustified = false }) => {
   const { pathname } = useLocation();
