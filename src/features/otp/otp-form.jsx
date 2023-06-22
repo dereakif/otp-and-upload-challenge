@@ -75,6 +75,7 @@ const OtpForm = ({ handleOnSubmit, handleSendOtp, validOtp }) => {
     const { value } = event.target;
     const inputId = event.target.id;
     setIsVerified(null);
+    methods.clearErrors();
     if (!value) focusToPrevInput(inputId);
     else focusToNextInput(inputId);
   };
@@ -119,12 +120,14 @@ const OtpForm = ({ handleOnSubmit, handleSendOtp, validOtp }) => {
     });
 
   const handleVerifyOtp = (otp) => {
-    if (otp === validOtp) {
+    const isUsersOtpValid = otp === validOtp;
+    if (isUsersOtpValid) {
       handleOnSubmit();
       stopTimer();
     } else {
       handleWrongOtp();
     }
+    setIsVerified(isUsersOtpValid);
   };
 
   const handleSubmit = (values) => {
@@ -134,9 +137,11 @@ const OtpForm = ({ handleOnSubmit, handleSendOtp, validOtp }) => {
   };
 
   const isInputIncorrect = Object.keys(methods.formState.errors).length === 4;
+
   const isInputEmpty = Object.values(methods.getValues()).some(
     (item) => item === ""
   );
+
   const showErrorMessage =
     isVerified !== null && !isVerified && isInputIncorrect;
 
